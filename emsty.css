@@ -204,25 +204,4 @@ h1 {
     color: #fff;
 }
 
-@media screen and (max-width: 768px) {
-    h1 {
-        display: grid;
-        grid-template-columns: auto;
-        align-items: center;
-        justify-self: center;
-        width: 100%;
-        margin: 0 auto;
-        height: 90vh;
-    }
-
-   
-    }
-
-@media screen and (max-width: 480px) {
-    h1 {
-        font-size: 2rem;
-        margin-top: 3rem;
-    }
-   
-}
 
