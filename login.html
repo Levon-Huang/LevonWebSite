@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <link rel="stylesheet" href="signlogin.css" />
+  <script src="https://kit.fontawesome.com/7c11051574.js" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar__container">
+      <a href="/" id="navbar__logo"><i class="fa-solid fa-rocket"> </i> LENHN</a>
+      <ul class="navbar__menu">
+        <li class="navbar__item"><a href="/" class="navbar__links">Home</a></li>
+        <li class="navbar__item"><a href="/techh.html" class="navbar__links">Market</a></li>
+        <li class="navbar__item"><a href="/emty.html" class="navbar__links">Portfolio</a></li>
+        <li class="navbar__btn"><a href="/sign.html" class="button">Sign Up</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="main"> 
+    <div class="auth-container">
+      <div class="auth-card">
+        <h2>LOGIN</h2>
+        <label>Email</label>
+        <input type="email" id="login-email" placeholder="Email">
+        <label>Password</label>
+        <input type="password" id="login-password" placeholder="Password">
+        <button class="primary-btn" onclick="logIn()">LOGIN</button>
+
+        <div class="divider"><span>OR</span></div>
+
+        <button class="google-btn"><i class="fa-brands fa-google"></i> Login with Google</button>
+
+        <p class="switch-text">New here? <a href="sign.html" class="switch-link">  Sign up</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function logIn() {
+      const email = document.getElementById("login-email").value;
+      alert("Logged in as " + email);
+    }
+  </script>
+</body>
+</html>
