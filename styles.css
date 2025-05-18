@@ -382,7 +382,7 @@
     height: 525px;
     width: 400px;
     border-radius: 4px;
-    background-image: url(../images/crypto.jpg);
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(17,17,17,0.6 ) 100%),url(images/crypto.jpg);
     background-size: cover;
     background-position: center center; /* centers the background image */
     position: relative;
@@ -391,7 +391,7 @@
 
 
 .services__card:nth-child(2) {
-    background-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(17,17,17,0.6 ) 100%),url(/images/stock.jpg);
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(17,17,17,0.6 ) 100%),url(images/stock.jpg);
 }
 
 .services h2 {
