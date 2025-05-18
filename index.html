@@ -154,9 +154,10 @@
     };
 
     // Get Started Button
-    const email = user.email;
-    const name = email.split("@")[0];
+    const name = user.displayName || (user.email ? user.email.split("@")[0] : "User");
     getStartedBtn.textContent = `Hello, ${name}!`;
+    
+    // Style the button (same as your code)
     getStartedBtn.style.background = 'none';
     getStartedBtn.style.border = 'none';
     getStartedBtn.style.color = 'white';
@@ -168,6 +169,7 @@
     getStartedBtn.style.textDecoration = 'none';
     getStartedBtn.style.userSelect = 'none';
     getStartedBtn.style.pointerEvents = 'none'; // disable click and hover
+ // disable click and hover
   } else {
     // Auth Button
     authBtn.textContent = "Sign Up";
