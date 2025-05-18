@@ -33,7 +33,7 @@ document.getElementById("submit").addEventListener("click", function (e) {
     .then((userCredential) => {
       const user = userCredential.user;
       alert(`Welcome back, ${user.email}`);
-      window.location.href = "welcome.html"; // Redirect after login
+      window.location.href = "welcomeback.html"; // Redirect after login
     })
     .catch((error) => {
       alert("Login failed: " + error.message);
@@ -47,7 +47,7 @@ document.getElementById("google-signin").addEventListener("click", function () {
     .then((result) => {
       const user = result.user;
       alert(`Welcome, ${user.displayName}`);
-      window.location.href = "welcome.html";
+      window.location.href = "welcomeback.html";
     })
     .catch((error) => {
       alert("Google login failed: " + error.message);
@@ -61,7 +61,7 @@ document.getElementById("facebook-signin").addEventListener("click", function ()
     .then((result) => {
       const user = result.user;
       alert(`Welcome, ${user.displayName}`);
-      window.location.href = "welcome.html";
+      window.location.href = "welcomeback.html";
     })
     .catch((error) => {
       alert("Facebook login failed: " + error.message);
