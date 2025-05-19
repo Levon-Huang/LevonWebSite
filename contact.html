@@ -1,46 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="emsty.css">
-    <script src="https://kit.fontawesome.com/7c11051574.js" crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap" rel="stylesheet">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9802844518901537"
-     crossorigin="anonymous"></script>
-    <meta name="google-adsense-account" content="ca-pub-9802844518901537">
+   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How It Works - LEVON Website</title>
+  <link rel="stylesheet" href="aboutme.css" />
+  <script src="https://kit.fontawesome.com/7c11051574.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="navbar__container">
-            <a href="./" id="navbar__logo"><i class="fa-solid fa-rocket"> </i>
-                LENHN</a>
-            <div class="navbar__toggle" id="mobile-menu">
-              <span class="bar"></span> <span class="bar"></span>
-              <span class="bar"></span>
-            </div>
-            <ul class="navbar__menu">
-                <li class="navbar__item">
-                    <a href="./" class="navbar__links">Home</a>
-                </li>
-                <li class="navbar__item">
-                    <a href="techh.html" class="navbar__links">Tech</a>
-                </li>
-                <li class="navbar__item">
-                    <a href="emty.html" class="navbar__links">Products</a>
-                </li>
-                <li class="navbar__btn">
-                    <a href="sign.html" class="button">Sign Up</a>
-                </li>
-            </ul>
-        </div>
-      </nav>
-    <h1>EMAIL: kenzyusp1155@gmail.com 
-        <img src="images/pic11.svg" alt="pic">
-    </h1>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar__container">
+      <a href="./" id="navbar__logo"><i class="fa-solid fa-rocket"></i> LENHN</a>
+      <div class="navbar__toggle" id="mobile-menu">
+        <span class="bar"></span> <span class="bar"></span> <span class="bar"></span>
+      </div>
+      <ul class="navbar__menu">
+        <li class="navbar__item"><a href="./" class="navbar__links">Home</a></li>
+        <li class="navbar__item"><a href="techh.html" class="navbar__links">Market</a></li>
+        <li class="navbar__item"><a href="emty.html" class="navbar__links">Portfolio</a></li>
+        <li class="navbar__btn"><a href="sign.html" class="button" id="auth-btn">Sign Up</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Contact Content -->
+  <div class="contact-container">
+    <h1>Contact Me</h1>
+    <p>If you'd like to get in touch, please reach out using the info below.</p>
+    
+    <ul>
+      <li><strong>Email:</strong> kenzyusp1155@gmail.com</li>
+      <li><strong>Media:</strong> <a href="https://www.instagram.com/huang__04/" target="_blank">Instagram</a> OR
+                 <a href="https://www.facebook.com/OoozzzZ22" target="_blank">Facebook</a></li>
+      <li><strong>Location:</strong> United Stated </li>
+    </ul>
+
+    <h2>Send a Message</h2>
+    <form action="mailto:kenzyusp1155@gmail.com" method="POST" enctype="text/plain">
+      <label for="name">Name:</label><br />
+      <input type="text" id="name" name="name" required /><br /><br />
+
+      <label for="email">Email:</label><br />
+      <input type="email" id="email" name="email" required /><br /><br />
+
+      <label for="message">Message:</label><br />
+      <textarea id="message" name="message" rows="6" required></textarea><br /><br />
+
+      <button type="submit" class="button">Send</button>
+    </form>
+  </div>
+
+  <!-- Optional JS for Mobile Menu -->
+  <script>
+    const menu = document.querySelector("#mobile-menu");
+    const menuLinks = document.querySelector(".navbar__menu");
+
+    menu.addEventListener("click", () => {
+      menu.classList.toggle("is-active");
+      menuLinks.classList.toggle("active");
+    });
+  </script>
+
     <script src="app.js"></script>
 </body>
 </html>
