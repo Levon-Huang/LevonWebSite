@@ -289,13 +289,29 @@
 }
 
 .main__img--container {
-    text-align: center;
+  text-align: center;
 }
 
-#main__img {
-    height: 80%;
-    width: 80%;
+.main__img--container img {
+  width: 100%;
+  max-width: 600px; /* Default large size for small screens */
+  height: auto;
 }
+
+/* For medium screens (like tablets) */
+@media screen and (min-width: 768px) {
+  .main__img--container img {
+    max-width: 800px; /* Bigger on tablets */
+  }
+}
+
+/* For large screens (like desktops) */
+@media screen and (min-width: 1024px) {
+  .main__img--container img {
+    max-width: 1000px; /* Even bigger on desktops */
+  }
+}
+
 
 /* Mobile Responsive */
 @media screen and (max-width: 768px) {
