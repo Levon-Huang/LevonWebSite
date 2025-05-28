@@ -1,0 +1,129 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #111;
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Central container */
+.container {
+  width: 100%;
+  max-width: 700px;
+  text-align: center;
+  padding: 40px;
+}
+
+/* Headings and text */
+h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #0ff;
+}
+
+p {
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+  color: #aaa;
+}
+
+/* Button group */
+.button-group {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.market-button {
+  background-color: transparent;
+  border: 2px solid #0ff;
+  color: #0ff;
+  padding: 14px 30px;
+  border-radius: 6px;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.market-button:hover {
+  background-color: #0ff;
+  color: #111;
+  transform: scale(1.05);
+}
+
+/* Suggestions box */
+#suggestions {
+  margin-top: 20px;
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+#suggestions div {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#suggestions div:hover {
+  background-color: #333;
+}
+
+#suggestions img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  border-radius: 4px;
+}
+
+/* Details box */
+#coin-details {
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 30px;
+  text-align: left;
+  color: #ccc;
+}
+
+#coin-details h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+#coin-details p {
+  margin: 6px 0;
+}
+
+#add-stock {
+  margin-top: 25px;
+  background-color: #0ff;
+  color: #111;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#add-stock:hover {
+  background-color: #00cccc;
+}
