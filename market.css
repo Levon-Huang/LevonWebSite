@@ -308,6 +308,17 @@ header .tagline {
   font-size: 0.9rem;
 }
 
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 3rem;
+  }
+
+  header .tagline {
+    font-size: 0.8rem;
+  }
+}
+
+
 /* Card grid */
 .crypto-container {
   display: grid;
