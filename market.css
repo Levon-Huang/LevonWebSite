@@ -241,7 +241,7 @@ body {
 .stock-button {
   position: fixed;
   top: 20px;
-  right: 750px;
+  right: 715px;
   padding: 16px 28px;
   font-size: 18px;
   background-color: #007bff;
@@ -411,5 +411,33 @@ header .tagline {
   gap: 0.5rem;
   font-weight: 500;
 }
+
+/* ───── Add-Coin Modal ─────────────────────────────── */
+.modal{
+  position:fixed; inset:0;
+  background:rgba(0,0,0,.55);
+  display:flex; align-items:center; justify-content:center;
+  z-index:1000;
+}
+.modal-content{
+  background:#161b22; color:#fff;
+  border:1px solid #30363d;
+  border-radius:8px;
+  padding:24px 28px; width:90%; max-width:320px;
+  display:flex; flex-direction:column; gap:14px;
+}
+.modal-content h3{margin-top:0; font-size:1.25rem;}
+.modal-content label{font-size:.9rem; display:flex; flex-direction:column; gap:4px;}
+.modal-content input{
+  padding:8px; border:none; border-radius:6px;
+  background:#22272e; color:#fff; font-size:1rem;
+}
+.modal-actions{display:flex; justify-content:space-between; gap:12px;}
+.modal-actions button{
+  flex:1; padding:8px 0; cursor:pointer; border:none; border-radius:6px;
+  background:#1e90ff; color:#fff; font-size:.95rem;
+}
+.modal-actions button:hover{background:#0072cc;}
+/* ──────────────────────────────────────────────────── */
 
 
