@@ -34,7 +34,7 @@
                 <a href="landing.html" class="navbar__links">Market</a>
             </li>
             <li class="navbar__item">
-                <a href="emty.html" class="navbar__links">Portfolio</a>
+                <a href="portfolio.html" id="portfolio-link" class="navbar__links">Portfolio</a>
             </li>
             <!-- In your nav -->
             <li class="navbar__btn">
@@ -120,6 +120,7 @@
   </div>
 </div>
 
+  
   <!--after sign up-->
   <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-app.js";
@@ -193,6 +194,21 @@ nts = 'none'; // disable click and hover
     getStartedBtn.style.pointerEvents = ''; // enable click
   }
 });
+
+// before sign up
+  const portfolioLink = document.getElementById("portfolio-link");
+  if (portfolioLink) {
+    portfolioLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      const user = auth.currentUser;
+      if (user) {
+        window.location.href = "portfolio.html";
+      } else {
+        alert("Please sign in to access your Portfolio.");
+        window.location.href = "sign.html";
+      }
+    });
+  }
 </script>
 
   <script src="app.js"></script>
