@@ -1,1 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfolio – LENHN</title>
+  <link rel="stylesheet" href="portfolio.css" />
+  <script src="https://kit.fontawesome.com/7c11051574.js" crossorigin="anonymous"></script>
+
+  <!-- Favicon and icons -->
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+  <link rel="manifest" href="images/site.webmanifest">
+</head>
+<body>
+
+<!-- Navbar Section -->
+<nav class="navbar">
+  <div class="navbar__container">
+    <a href="./" id="navbar__logo"><i class="fa-solid fa-rocket"></i> LENHN</a>
+    <div class="navbar__toggle" id="mobile-menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+    <ul class="navbar__menu">
+      <li class="navbar__item"><a href="./" class="navbar__links">Home</a></li>
+      <li class="navbar__item"><a href="landing.html" class="navbar__links">Market</a></li>
+      <li class="navbar__item"><a href="portfolio.html" id="portfolio-link" class="navbar__links active">Portfolio</a></li>
+      <li class="navbar__btn"><a href="sign.html" class="button" id="auth-btn">Sign Up</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Header -->
+<header class="portfolio-header">My Portfolio</header>
+
+<!-- Summary Box -->
+<div class="summary-box">
+  <h3>Portfolio Summary</h3>
+  <div class="summary-row"><span>Total Invested:</span> <span id="sum-invested">$0.00</span></div>
+  <div class="summary-row"><span>Stocks:</span> <span id="sum-stock">$0.00</span></div>
+  <div class="summary-row"><span>Crypto:</span> <span id="sum-crypto">$0.00</span></div>
+  <div class="summary-row"><span>Total Value:</span> <span id="sum-value">$0.00</span></div>
+  <div class="summary-row"><span>Return:</span> <span id="sum-return" class="positive">0.00%</span></div>
+</div>
+
+<!-- Toggle Buttons -->
+<div class="switch-buttons">
+  <button id="stocks-btn" class="active">Stocks</button>
+  <button id="crypto-btn">Crypto</button>
+</div>
+
+<!-- Stocks Section -->
+<section class="investment-section active" id="stocks-section">
+  <div class="asset-list" id="stocks-list"></div>
+</section>
+
+<!-- Crypto Section -->
+<section class="investment-section" id="crypto-section">
+  <div class="asset-list" id="crypto-list"></div>
+</section>
+
+<!--edit form--> 
+
+
+<div id="edit-form-modal" class="modal hidden">
+  <div class="modal-content">
+    <h3>Edit Asset</h3>
+    <form id="edit-form">
+      <input type="hidden" id="edit-id">
+      <input type="hidden" id="edit-type">
+
+      <label>Name:</label>
+      <input id="edit-name" disabled />
+
+      <label>Buy Price:</label>
+      <input id="edit-buyPrice" type="number" step="0.0001" />
+
+      <label>Input Mode:</label>
+      <select id="edit-input-mode">
+        <option value="units">Shares/Amount</option>
+        <option value="usd">USD</option>
+      </select>
+
+      <label id="edit-amount-label">Shares/Amount:</label>
+      <input id="edit-amount" type="number" step="0.000001" />
+
+      <button type="submit">Save</button>
+      <button type="button" onclick="closeEditForm()">Cancel</button>
+    </form>
+  </div>
+</div>
+
+</div>
+
+
+<!-- JavaScript -->
+
+<script>
+  // Update label based on input mode
+  document.getElementById("edit-input-mode").addEventListener("change", function () {
+    const mode = this.value;
+    const label = document.getElementById("edit-amount-label");
+    if (mode === "usd") {
+      label.textContent = "(USD):";
+    } else {
+      label.textContent = "Shares/Amount:";
+    }
+  });
+</script>
+
+
+<!--after sign up-->
+  <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAEuVGWjQc9jsdK6MxhgDCyuGtVHK49evo",
+    authDomain: "myweb-455da.firebaseapp.com",
+    projectId: "myweb-455da",
+    storageBucket: "myweb-455da.appspot.com",
+    messagingSenderId: "589487771494",
+    appId: "1:589487771494:web:98f6e38c403526f47d02a7",
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // Sign up button
+  const authBtn = document.getElementById("auth-btn");
+
+  onAuthStateChanged(auth, (user) => {
+  const authBtn = document.getElementById("auth-btn");
+  const getStartedBtn = document.getElementById("get-started-btn");
+
+  if (user) {
+    // Auth Button
+    authBtn.textContent = "Log Out";
+    authBtn.removeAttribute("href");
+    authBtn.onclick = (e) => {
+      e.preventDefault();
+      signOut(auth).then(() => {
+        alert("You have been logged out.");
+      });
+    };
+
+    // Get Started Button
+   const name = user.displayName || (user.email ? user.email.split("@")[0] : "User");
+    getStartedBtn.textContent = `Hello, ${name}!`;
+
+    // Style the button (same as your code)
+    getStartedBtn.style.background = 'none';
+    getStartedBtn.style.border = 'none';
+    getStartedBtn.style.color = 'white';
+    getStartedBtn.style.cursor = 'default';
+    getStartedBtn.style.fontSize = '2.5rem';
+    getStartedBtn.style.fontWeight = 'bold';
+    getStartedBtn.style.textAlign = 'left';
+    getStartedBtn.style.padding = '0';
+    getStartedBtn.style.textDecoration = 'none';
+    getStartedBtn.style.userSelect = 'none';
+    getStartedBtn.style.pointerEvents = 'none'; // disable click and hover
+nts = 'none'; // disable click and hover
+  } else {
+    // Auth Button
+    authBtn.textContent = "Sign Up";
+    authBtn.setAttribute("href", "sign.html");
+    authBtn.onclick = null;
+
+    // Get Started Button
+    getStartedBtn.textContent = 'Get Started';
+    getStartedBtn.style.background = '';
+    getStartedBtn.style.border = '';
+    getStartedBtn.style.color = '';
+    getStartedBtn.style.cursor = 'pointer';
+    getStartedBtn.style.fontSize = '';
+    getStartedBtn.style.fontWeight = '';
+    getStartedBtn.style.textAlign = '';
+    getStartedBtn.style.padding = '';
+    getStartedBtn.style.textDecoration = '';
+    getStartedBtn.style.userSelect = '';
+    getStartedBtn.style.pointerEvents = ''; // enable click
+  }
+});
+
+// before sign up
+  const portfolioLink = document.getElementById("portfolio-link");
+  if (portfolioLink) {
+    portfolioLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      const user = auth.currentUser;
+      if (user) {
+        window.location.href = "portfolio.html";
+      } else {
+        alert("Please sign in to access your Portfolio.");
+        window.location.href = "sign.html";
+      }
+    });
+  }
+</script>
+
+<script type="module" src="portfolio.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
 
