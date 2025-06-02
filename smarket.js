@@ -9,6 +9,30 @@
    3. Search-with-suggestions + details panel with logos
    ======================================================= */
 
+   /* ---------- Firebase init (must run first) ---------- */
+const firebaseConfig = {
+  apiKey: "AIzaSyAEuVGWjQc9jsdK6MxhgDCyuGtVHK49evo",
+    authDomain: "myweb-455da.firebaseapp.com",
+    projectId: "myweb-455da",
+    storageBucket: "myweb-455da.appspot.com",
+    messagingSenderId: "589487771494",
+    appId: "1:589487771494:web:98f6e38c403526f47d02a7",
+};
+
+firebase.initializeApp(firebaseConfig);
+const db   = firebase.firestore();
+const auth = firebase.auth();
+
+/* sign-in anonymously so writes work (swap to real auth later) */
+auth.onAuthStateChanged((u) => {
+  if (u) console.log("Signed in as", u.uid);
+  else   auth.signInAnonymously().catch(err => console.error("Anon sign-in failed:", err));
+});
+/* ---------------------------------------------------- */
+
+
+
+/*------------------------------------------------------------------------------------------ */
 const API_KEY = "d0rbm5hr01qn4tjhmll0d0rbm5hr01qn4tjhmllg";  // <<< Replace with your key
 const BASE    = "https://finnhub.io/api/v1";
 
@@ -109,6 +133,88 @@ setInterval(loadTop, 300_000);
 const inputEl  = document.getElementById("coin-input");   // keeping original ID
 const sugBox   = document.getElementById("suggestions");
 const details  = document.getElementById("coin-details");
+/* ---------- modal helpers (stocks) ------------------- */
+const modal      = document.getElementById("addCoinModal");   // reuse same modal
+const nameEl     = document.getElementById("modal-coin-name");
+const sharesEl   = document.getElementById("invested-input"); // we’ll treat as “shares”
+const priceEl    = document.getElementById("price-input");    // average buy price
+let   currentStock = null;
+
+document.getElementById("cancel-coin-btn").onclick = closeModal;
+document.getElementById("save-coin-btn").onclick   = saveStock;
+
+function openModal(stock) {
+  currentStock = stock;
+  nameEl.textContent = `${stock.symbol} — add position`;
+  sharesEl.value = priceEl.value = "";
+  modal.style.display = "flex";
+}
+function closeModal() { modal.style.display = "none"; }
+
+async function saveStock() {
+  const user = auth.currentUser;
+  if (!user) {
+    alert("Please sign in first");
+    return;
+  }
+
+  const shares = +sharesEl.value;
+  const buy = +priceEl.value;
+  if (isNaN(shares) || isNaN(buy) || shares <= 0 || buy <= 0) {
+    alert("Enter valid numbers");
+    return;
+  }
+
+  const newInvested = shares * buy;
+  const symbol = currentStock.symbol;
+
+  try {
+    const assetsRef = db.collection("users").doc(user.uid).collection("assets");
+    const querySnap = await assetsRef.where("symbol", "==", symbol).where("type", "==", "stock").get();
+
+    if (!querySnap.empty) {
+      // Update the existing document
+      const doc = querySnap.docs[0];
+      const data = doc.data();
+
+      const totalShares = data.shares + shares;
+      const newTotalInvested = data.totalInvested + newInvested;
+      const newAvgPrice = newTotalInvested / totalShares;
+
+      await doc.ref.update({
+        shares: totalShares,
+        totalInvested: newTotalInvested,
+        buyPrice: newAvgPrice,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      });
+
+      alert(`${symbol} updated!`);
+    } else {
+      // Create a new document
+      const docData = {
+        symbol: currentStock.symbol,
+        name: currentStock.name || currentStock.symbol,
+        logo: currentStock.logo || "",
+        shares,
+        buyPrice: buy,
+        totalInvested: newInvested,
+        type: "stock",
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      };
+
+      await assetsRef.add(docData);
+      alert(`${symbol} added!`);
+    }
+
+    closeModal();
+  } catch (err) {
+    console.error(err);
+    alert("Save failed");
+  }
+}
+
+
+
 
 function debounce(fn, d = 300) {
   let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), d); };
@@ -188,8 +294,10 @@ async function searchCoin() {
   </div>`;
 
 
-    document.getElementById("add-stock")
-            .onclick = () => alert(`Added ${sym}!`);
+    document.getElementById("add-stock").onclick = () =>
+  openModal({ symbol: sym, name: p.name, logo: p.logo });
+
+
   } catch (e) {
     details.innerHTML = `<p style="color:red;">${e.message}</p>`;
   }
