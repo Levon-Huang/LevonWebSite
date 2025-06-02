@@ -26,7 +26,7 @@
       <ul class="navbar__menu">
         <li class="navbar__item"><a href="./" class="navbar__links">Home</a></li>
         <li class="navbar__item"><a href="landing.html" class="navbar__links">Market</a></li>
-        <li class="navbar__item"><a href="emty.html" class="navbar__links">Portfolio</a></li>
+        <li class="navbar__item"><a href="portfolio.html" id="portfolio-link" class="navbar__links">Portfolio</a></li>
         <li class="navbar__btn"><a href="sign.html" class="button" id="auth-btn">Sign Up</a></li>
       </ul>
     </div>
@@ -39,6 +39,96 @@ This platform became more than just a personal learning project—it evolved int
 Looking ahead, I hope to continue improving this website by integrating more advanced features and expanding its functionality. Ultimately, my aspiration is to build a career in technology where I can develop impactful tools that empower individuals and solve real-world problems.
 
 </p>
+
+ <!--after sign up-->
+  <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAEuVGWjQc9jsdK6MxhgDCyuGtVHK49evo",
+    authDomain: "myweb-455da.firebaseapp.com",
+    projectId: "myweb-455da",
+    storageBucket: "myweb-455da.appspot.com",
+    messagingSenderId: "589487771494",
+    appId: "1:589487771494:web:98f6e38c403526f47d02a7",
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // Sign up button
+  const authBtn = document.getElementById("auth-btn");
+
+  onAuthStateChanged(auth, (user) => {
+  const authBtn = document.getElementById("auth-btn");
+  const getStartedBtn = document.getElementById("get-started-btn");
+
+  if (user) {
+    // Auth Button
+    authBtn.textContent = "Log Out";
+    authBtn.removeAttribute("href");
+    authBtn.onclick = (e) => {
+      e.preventDefault();
+      signOut(auth).then(() => {
+        alert("You have been logged out.");
+      });
+    };
+
+    // Get Started Button
+   const name = user.displayName || (user.email ? user.email.split("@")[0] : "User");
+    getStartedBtn.textContent = `Hello, ${name}!`;
+
+    // Style the button (same as your code)
+    getStartedBtn.style.background = 'none';
+    getStartedBtn.style.border = 'none';
+    getStartedBtn.style.color = 'white';
+    getStartedBtn.style.cursor = 'default';
+    getStartedBtn.style.fontSize = '2.5rem';
+    getStartedBtn.style.fontWeight = 'bold';
+    getStartedBtn.style.textAlign = 'left';
+    getStartedBtn.style.padding = '0';
+    getStartedBtn.style.textDecoration = 'none';
+    getStartedBtn.style.userSelect = 'none';
+    getStartedBtn.style.pointerEvents = 'none'; // disable click and hover
+nts = 'none'; // disable click and hover
+  } else {
+    // Auth Button
+    authBtn.textContent = "Sign Up";
+    authBtn.setAttribute("href", "sign.html");
+    authBtn.onclick = null;
+
+    // Get Started Button
+    getStartedBtn.textContent = 'Get Started';
+    getStartedBtn.style.background = '';
+    getStartedBtn.style.border = '';
+    getStartedBtn.style.color = '';
+    getStartedBtn.style.cursor = 'pointer';
+    getStartedBtn.style.fontSize = '';
+    getStartedBtn.style.fontWeight = '';
+    getStartedBtn.style.textAlign = '';
+    getStartedBtn.style.padding = '';
+    getStartedBtn.style.textDecoration = '';
+    getStartedBtn.style.userSelect = '';
+    getStartedBtn.style.pointerEvents = ''; // enable click
+  }
+});
+
+// before sign up
+  const portfolioLink = document.getElementById("portfolio-link");
+  if (portfolioLink) {
+    portfolioLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      const user = auth.currentUser;
+      if (user) {
+        window.location.href = "portfolio.html";
+      } else {
+        alert("Please sign in to access your Portfolio.");
+        window.location.href = "sign.html";
+      }
+    });
+  }
+</script>
 
   <script src="app.js"></script>
 </body>
