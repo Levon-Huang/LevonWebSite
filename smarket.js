@@ -33,7 +33,7 @@ auth.onAuthStateChanged((u) => {
 
 
 /*------------------------------------------------------------------------------------------ */
-const API_KEY = "d0rbm5hr01qn4tjhmll0d0rbm5hr01qn4tjhmllg";  // <<< Replace with your key
+const API_KEY = "d0rbm5hr01qn4tjhmll0d0rbm5hr01qn4tjhmllg";  
 const BASE    = "https://finnhub.io/api/v1";
 
 /* ---------- 1. Live price cards ----------------------- */
